@@ -24,3 +24,8 @@ Gemfile.lock
 
 # Mac
 .DS_Store
+
+# MP3
+/public/files
+!/public/files/test.mp3
+!/public/files/alarm.mp3
