@@ -7,21 +7,6 @@ class ZippaTTL < Sinatra::Base
     erb :index
   end
 
-  get '/play' do
-    p params["text"]
-    File.write("public/files/#{params["text"]}.mp3", Net::HTTP.get(URI.parse("http://translate.google.com/translate_tts?tl=en&q=#{params["text"]}")))
-    system = Sonos::System.new
-    p system
-    "sonos not found" if system == nil
-    speaker = system.speakers.first
-    p speaker
-    "No speaker found" if speaker == nil
-    speaker.volume = 10
-    speaker.play 'http://10.0.1.25:9292/files/test.mp3'
-    
-    speaker.play
-  end
-  
   get '/addfile' do
     File.write("public/files/#{params["audio"]}.mp3", Net::HTTP.get(URI.parse("http://translate.google.com/translate_tts?tl=en&q=#{params["audio"]}")))
     redirect to('/listmp3s')
@@ -42,6 +27,27 @@ class ZippaTTL < Sinatra::Base
     else
       status 500
     end
+  end
+
+  post '/playmp3' do
+    file = params["file"]
+    volume = params["volume"]
+    status 400 if file == nil 
+    status 400 if volume == nil 
+    @@logging_enabled = true
+    system = Sonos::System.new
+    if system.topology.empty?
+      system = Sonos::System.new
+        if system.topology.empty?
+          puts "ERROR Missing sonos system"
+          status 400
+        end
+    end
+    speaker = system.speakers.first
+    speaker.volume = volume
+    mp3_url = 'http://' + request.env["HTTP_HOST"] + '/files/' + file
+    speaker.play mp3_url
+    speaker.play
   end
 
 end
