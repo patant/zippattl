@@ -1,7 +1,6 @@
-$(".btn.delete").click(function(){
-	console.log("delete");
-	)})
+function deleteFile (filename) {
+	console.log(filename);
+	$.post( "deletefile", { file: filename } );
+	location.reload();
+}
 
-$(".btn.play").click(function(){
-	console.log("play");
-	)})

@@ -36,9 +36,12 @@ class ZippaTTL < Sinatra::Base
     erb :listsonos
   end
 
-  post 'deletefile' do
-    p "deletefile"
-    redirect to('/listmp3s')
+  post '/deletefile' do
+    if File.delete("./public/files/#{params["file"]}")
+      status 200
+    else
+      status 500
+    end
   end
 
 end
