@@ -1,0 +1,41 @@
+<br>
+<br>
+<div class="row">
+    <div class="span6">
+        <h2>Avaiable mp3 files</h2>
+        <table class="table table-hover table-condensed">
+            <thead>
+                <tr>
+                <th>Files</th>
+                <th>Zippa url</th>
+                <th></th>
+                <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            <% @files.each do |f| %>
+                <tr>
+                    <td><i class="icon-music"></i> <%=f%></td>
+                    <td>http://10.10.10.10/<%=f%></td>
+                    <td><button class="btn btn-small btn-success play" type="button"><i class="icon-play"></i></button></td>
+                    <td><button class="btn btn-small btn-danger delete" type="button"><i class="icon-remove"></i></button></td>
+                </tr>
+            <% end %>
+            </tbody>
+        </table>
+    </div>
+</div>
+<br>
+
+<div class="row">
+    <div class="span4">
+        <form action="addfile">
+          <fieldset>
+            <label>Add new audio</label>
+            <input type="text" name="audio" placeholder="alarm...">
+            <span class="help-block">File name will be the same as the input</span>
+            <button type="submit" class="btn">Submit</button>
+          </fieldset>
+        </form>
+    </div>
+</div>
