@@ -34,15 +34,16 @@ class ZippaTTL < Sinatra::Base
     volume = params["volume"]
     status 400 if file == nil 
     status 400 if volume == nil 
-    @@logging_enabled = true
-    system = Sonos::System.new
-    if system.topology.empty?
+
+    for i in 0..5 do
       system = Sonos::System.new
-        if system.topology.empty?
-          puts "ERROR Missing sonos system"
-          status 400
-        end
+      break if !system.topology.empty?
     end
+    if system.topology.empty?
+      puts "ERROR Missing sonos system"
+      status 400
+    end
+
     speaker = system.speakers.first
     speaker.volume = volume
     mp3_url = 'http://' + request.env["HTTP_HOST"] + '/files/' + file
