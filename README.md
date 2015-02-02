@@ -14,3 +14,7 @@ Ruby Gems:
 	rackup -o $IP_OF_YOURHOST
 
 Now you should have a webserver up and running on $IP_OF_YOURHOST:9292
+
+## TODO
+* Define Sonos ip
+* Support diffrent language
