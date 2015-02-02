@@ -1,4 +1,6 @@
 require 'net/http'
+require 'erb'
+include ERB::Util
 
 set :public_folder, 'public'
 
@@ -8,7 +10,7 @@ class ZippaTTL < Sinatra::Base
   end
 
   get '/addfile' do
-    File.write("public/files/#{params["audio"]}.mp3", Net::HTTP.get(URI.parse("http://translate.google.com/translate_tts?tl=en&q=#{params["audio"]}")))
+    File.write("public/files/#{params["audio"].downcase.tr(" ", "_")}.mp3", Net::HTTP.get(URI.parse("http://translate.google.com/translate_tts?tl=en&q=#{url_encode(params["audio"])}")))
     redirect to('/listmp3s')
   end
 
