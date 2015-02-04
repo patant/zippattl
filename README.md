@@ -18,3 +18,4 @@ Now you should have a webserver up and running on $IP_OF_YOURHOST:9292
 ## TODO
 * Define Sonos ip
 * Support diffrent language
+* Upload mp3 files
