@@ -6,3 +6,5 @@ function deleteFile (filename) {
 function playFile (filename) {
 	$.post( "playmp3?volume=10&file=" + filename);
 }
+
+
