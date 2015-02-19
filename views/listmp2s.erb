@@ -16,13 +16,17 @@
             <% @files.each do |f| %>
                 <tr>
                     <td><i class="icon-music"></i> <%=f%></td>
-                    <td>http://<%=request.env["HTTP_HOST"]%>/playmp3?volume=10&file=<%=f%></td>
+                    <td class="zippaurl">http://<%=request.env["HTTP_HOST"]%>/playmp3?volume=10&file=<%=f%></td>
                     <td><button class="btn btn-small btn-success play" type="button" onclick="playFile('<%=f%>')"><i class="icon-play"></i></button></td>
                     <td><button class="btn btn-small btn-danger delete" type="button" onclick="deleteFile('<%=f%>')"><i class="icon-remove"></i></button></td>
                 </tr>
             <% end %>
             </tbody>
         </table>
+        <p>
+        <h4>Volume:</h4>
+        10% <input class="volume" type="range" min="10" max="100" step="10" value="10" /> 100%
+        </p>
     </div>
 </div>
 <br>
