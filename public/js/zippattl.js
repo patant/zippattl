@@ -3,8 +3,10 @@ function deleteFile (filename) {
 	location.reload();
 }
 
-function playFile (filename) {
-	$.post( "playmp3?volume=10&file=" + filename);
+function playFile (buttonEl) {
+	url = $(buttonEl).closest('td').prev('td').text()
+	console.log(url)
+	$.post(url);
 }
 
 $(".volume").change(function(){
@@ -15,3 +17,15 @@ $(".volume").change(function(){
 		$(v).html($newUrl)
 	})
 });
+
+$(".player").change(function(){
+	$value = $(this).val().replace(/uuid:/, "")
+	$urls = $(".zippaurl")
+	console.log($value)
+	$.each($urls, function(i,v){
+		console.log(v);
+
+		$newUrl = $(v).html().replace(/(.*player=)(.*)/, "$1" + $value) 
+		$(v).html($newUrl)
+	})
+})
