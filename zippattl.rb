@@ -25,7 +25,7 @@ class ZippaTTL < Sinatra::Base
       status 400
     end
     @speakers = system.speakers
-    erb :listmp2s
+    erb :listmp3s
   end
 
   get '/listsonos' do
